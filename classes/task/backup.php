@@ -95,8 +95,8 @@ class backup extends \core\task\scheduled_task
                 $setting->set_value('0');
                 $setting = $task->get_setting('customfield');
                 $setting->set_value('0');
-                $setting = $task->get_setting('root_customfield');
-                $setting->set_value('0');
+                //$setting = $task->get_setting('root_customfield');
+                //$setting->set_value('0');
             } 
         }
         
@@ -105,9 +105,13 @@ class backup extends \core\task\scheduled_task
         $result = $bc->get_results();
 
         if(isset($result['backup_destination']) && $result['backup_destination']) {
-            $file = $result['backup_destination'];
             /** @var $file stored_file */
+            $file = $result['backup_destination'];
+            
             $destination = get_config('local_nkecoursetemplate', 'path') . str_replace('/', '', $course->idnumber) . '.mbz';
+            if(file_exists($destination)) {
+                @unlink($destination);
+            }
             if(!$file->copy_content_to($destination)) {
                 cli_error("Problems copying final backup to '". $destination . "'");
             } else {

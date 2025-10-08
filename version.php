@@ -18,6 +18,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_nkecoursetemplate';
-$plugin->version = 2025100211;
+$plugin->version = 2025100801;
 $plugin->requires = 2024100100;
-$plugin->release = '1.0.0';
+$plugin->release = '1.0.1';
